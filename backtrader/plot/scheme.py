@@ -176,7 +176,7 @@ class PlotScheme(object):
         self.hlineswidth = 1.0
 
         # Default color scheme: Tableau 10
-        self.lcolors = tableau10
+        self.lcolors = tableau20
 
         # strftime Format string for the display of ticks on the x axis
         self.fmt_x_ticks = '%Y-%m-%d %H:%M'

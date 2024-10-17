@@ -261,7 +261,7 @@ class Plot_OldSync(with_metaclass(MetaParams, object)):
             # breaks the presentation of the date labels. why?
             # Applying the manual rotation with setp cures the problem
             # but the labels from all axis but the last have to be hidden
-            for ax in laxis:
+            for ax in laxis[0:-1]:
                 self.mpyplot.setp(ax.get_xticklabels(), visible=False)
 
             self.mpyplot.setp(lastax.get_xticklabels(), visible=True,
