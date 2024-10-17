@@ -95,7 +95,10 @@ class PInfo(object):
 
 
 class Plot_OldSync(with_metaclass(MetaParams, object)):
-    params = (('scheme', PlotScheme()),)
+    params = (
+        ('scheme', PlotScheme()),
+        ('pinf', None)
+    )
 
     def __init__(self, **kwargs):
         for pname, pvalue in kwargs.items():
@@ -133,7 +136,7 @@ class Plot_OldSync(with_metaclass(MetaParams, object)):
         import matplotlib.pyplot as mpyplot
         self.mpyplot = mpyplot
 
-        self.pinf = PInfo(self.p.scheme)
+        self.pinf = PInfo(self.p.scheme) if self.p.pinf is None else self.p.pinf
         self.sortdataindicators(strategy)
         self.calcrows(strategy)
 
@@ -242,7 +245,7 @@ class Plot_OldSync(with_metaclass(MetaParams, object)):
 
             # Put the subplots as indicated by hspace
             fig.subplots_adjust(hspace=self.pinf.sch.plotdist,
-                                top=0.98, left=0.05, bottom=0.05, right=0.95)
+                                top=0.98, left=0.05, bottom=0.1, right=0.95)
 
             laxis = list(self.pinf.daxis.values())
 
@@ -264,6 +267,8 @@ class Plot_OldSync(with_metaclass(MetaParams, object)):
             for ax in laxis[0:-1]:
                 self.mpyplot.setp(ax.get_xticklabels(), visible=False)
 
+            print(f'LAbels: {lastax.get_xticklabels()}')
+            print(f'ax LAbels: {ax.get_xticklabels()}')
             self.mpyplot.setp(lastax.get_xticklabels(), visible=True,
                               rotation=self.pinf.sch.tickrotation)
 
