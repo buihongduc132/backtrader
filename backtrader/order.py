@@ -426,6 +426,7 @@ class OrderBase(with_metaclass(MetaParams, object)):
         '''Add the keys, values of kwargs to the internal info dictionary to
         hold custom information in the order
         '''
+        
         for key, val in iteritems(kwargs):
             self.info[key] = val
 
@@ -568,8 +569,12 @@ class Order(OrderBase):
                 opened, openedvalue, openedcomm,
                 margin, pnl,
                 psize, pprice):
-
-        super(Order, self).execute(dt, size, price,
+        # TODO: BHD Check the monkey patch if error
+        # super(Order, self).execute(dt, size, price,
+        #                            closed, closedvalue, closedcomm,
+        #                            opened, openedvalue, openedcomm,
+        #                            margin, pnl, psize, pprice)
+        super().execute(dt, size, price,
                                    closed, closedvalue, closedcomm,
                                    opened, openedvalue, openedcomm,
                                    margin, pnl, psize, pprice)

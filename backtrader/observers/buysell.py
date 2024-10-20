@@ -46,7 +46,7 @@ class BuySell(Observer):
 
     plotinfo = dict(plot=True, subplot=False, plotlinelabels=True)
     plotlines = dict(
-        buy=dict(marker='^', markersize=8.0, color='lime',
+        buy=dict(marker='^', markersize=8.0, color='green',
                  fillstyle='full', ls=''),
         sell=dict(marker='v', markersize=8.0, color='red',
                   fillstyle='full', ls='')
@@ -55,7 +55,13 @@ class BuySell(Observer):
     params = (
         ('barplot', False),  # plot above/below max/min for clarity in bar plot
         ('bardist', 0.015),  # distance to max/min in absolute perc
+        ('markersize', 22),
     )
+    
+    # def __init__(self):
+    #     print(f'self.plotlines: {self.plotlines}')
+        # self.plotlines['buy']['markersize'] = self.p.markersize
+        # self.plotlines['sell']['markersize'] = self.p.markersize
 
     def next(self):
         buy = list()

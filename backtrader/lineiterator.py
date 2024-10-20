@@ -395,6 +395,16 @@ class IndicatorBase(DataAccessor):
 
 
 class ObserverBase(DataAccessor):
+
+    def _notify_trade(self, trade):
+        # for child in self._children:
+        #     child._notify_trade(trade)
+
+        self.notify_trade(trade)
+        
+    def notify_trade(self, trade):
+        pass
+    
     pass
 
 

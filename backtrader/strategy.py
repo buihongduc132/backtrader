@@ -245,6 +245,15 @@ class Strategy(with_metaclass(MetaStrategy, StrategyBase)):
         nsuffix = next(self._alnames[anname])
         anname += str(nsuffix or '')  # 0 (first instance) gets no suffix
         analyzer = ancls(*anargs, **ankwargs)
+        
+        # on_add = self.get('_on_annalyzer_add')
+        # if on_add:
+        #     on_add(name=anname, suffix=nsuffix, info=dict(
+        #         ancls=ancls,
+        #         anargs=anargs,
+        #         ankwargs=ankwargs,
+        #     ))
+            
         self.analyzers.append(analyzer, anname)
 
     def _addobserver(self, multi, obscls, *obsargs, **obskwargs):
@@ -597,6 +606,8 @@ class Strategy(with_metaclass(MetaStrategy, StrategyBase)):
             for analyzer in itertools.chain(self.analyzers,
                                             self._slave_analyzers):
                 analyzer._notify_trade(trade)
+            for observer in self.observers:
+                observer._notify_trade(trade)
 
         if qorders:
             return  # cash is notified on a regular basis
